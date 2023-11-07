@@ -4,11 +4,11 @@ public class Product {
     //Variables
     private static int amountProducts = 0;
     private int idProduct;
-
     private String name;
     private int amount;
     private double price;
     private String code;
+    private boolean productStatus;
 
     //Constructores
     public Product(){
@@ -16,6 +16,7 @@ public class Product {
         amount = 0;
         price = 0.0;
         code = "";
+        productStatus = true;
         idProduct = amountProducts++;
     }
 
@@ -60,19 +61,35 @@ public class Product {
         this.code = code;
     }
 
+    public boolean isProductStatus() {
+        return productStatus;
+    }
+
+    public void setProductStatus(boolean productStatus) {
+        this.productStatus = productStatus;
+    }
+
     //toString
     @Override
     public String toString() {
+
+        String _status = productStatus == true ? "Activo": "Descatalogado";
+
         return "----------------------------------------" +
                 "\nItem Number \t: " + idProduct +
                 "\nCode \t: " + code +
                 "\nName \t: " + name +
                 "\nQuantity in Stock \t: " + amount +
-                "\nPrice \t: " + price;
+                "\nPrice \t: " + price +
+                "\nStock Value \t: " + getInventoryValue() +
+                "\nProduct Status \t: " + _status +
+                "\n-----------------------------------------" ;
     }
 
     //Metodos
-
+    public double getInventoryValue(){
+        return this.price*this.amount;
+    }
 
 
 }
